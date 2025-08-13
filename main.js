@@ -11,7 +11,7 @@ let lastTimestamp = null;
 
 // Chart setup
 const charts = [];
-const colors = ['#3b82f6', '#10b981', '#ef4444'];
+const colors = ['#ffcc00', '#00cc99', '#33cccc'];
 const maxPoints = 100;
 
 // Battery setup
