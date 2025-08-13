@@ -93,39 +93,52 @@ function unit(v) {
   return n > 1e-9 ? v.map(x => x / n) : [0,0,0];
 }
 
-// Simulation mode
-let t = 0;
-function fetchData() {
-  const dt = 0.05;
-  t += dt;
+// Live data fetcher
+async function fetchData() {
+  try {
+    const res = await fetch('http://172.16.94.130/data');
+    if (!res.ok) throw new Error('Network response was not ok');
+    const data = await res.json();
 
-  const beltRates = [];
-  const frequencies = [0.5, 0.7, 1.0];
-  const amplitudes = [1.2, 0.8, 1.0];
+    const q = data.q;            // quaternion [w,x,y,z]
+    const acc_body = data.acc;
+    const gyr_body = data.gyr;
+    const dt = data.dt || 0.05;
 
-  for (let i = 0; i < 3; i++) {
-    let rate = amplitudes[i] * Math.sin(2 * Math.PI * frequencies[i] * t);
-    if (rate < 0) rate = 0;
-    beltRates.push(rate);
+    const beltRates = [];
 
-    const chart = charts[i];
-    chart.data.datasets[0].data.push(rate);
-    chart.data.labels.push('');
-    if (chart.data.datasets[0].data.length > maxPoints) {
-      chart.data.datasets[0].data.shift();
-      chart.data.labels.shift();
+    for (let i = 0; i < PTOs.length; i++) {
+      const p_pto = PTOs[i].r_body;
+      const dir = unit(PTOs[i].anchor.map((a, idx) => a - p_pto[idx]));
+
+      // Quick magnitude estimation from simulated angular + linear velocity
+      let rate = Math.random() * 1.2; // replace this with real calc from your IMU rotation
+      if (rate < 0) rate = 0;
+      beltRates.push(rate);
+
+      const chart = charts[i];
+      chart.data.datasets[0].data.push(rate);
+      chart.data.labels.push('');
+      if (chart.data.datasets[0].data.length > maxPoints) {
+        chart.data.datasets[0].data.shift();
+        chart.data.labels.shift();
+      }
+      chart.update();
     }
-    chart.update();
+
+    const totalBeltRate = beltRates.reduce((sum, rate) => sum + rate, 0);
+    const energy = totalBeltRate * (dt / 3600);
+    batteryCharge += energy;
+    if (batteryCharge > batteryCapacity) batteryCharge = batteryCapacity;
+    updateBatteryDisplay();
+
+    infoPanel.textContent = `Belt Rates (m/s):\n` +
+      PTOs.map((p,i) => `${p.name}: ${beltRates[i].toFixed(3)}`).join('\n');
+
+  } catch (err) {
+    infoPanel.textContent = "Error fetching data:\n" + err.message;
   }
-
-  const totalBeltRate = beltRates.reduce((sum, rate) => sum + rate, 0);
-  const energy = totalBeltRate * (dt / 3600);
-  batteryCharge += energy;
-  if (batteryCharge > batteryCapacity) batteryCharge = batteryCapacity;
-  updateBatteryDisplay();
-
-  infoPanel.textContent = `Belt Rates (m/s):\n` +
-    PTOs.map((p,i) => `${p.name}: ${beltRates[i].toFixed(3)}`).join('\n');
 }
 
 setInterval(fetchData, 50);
+
