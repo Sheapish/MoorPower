@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>3-PTO Belt Rate Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="left-panel">
+    <canvas id="chart1" width="600" height="120"></canvas>
+    <canvas id="chart2" width="600" height="120"></canvas>
+    <canvas id="chart3" width="600" height="120"></canvas>
+  </div>
+
+  <div class="right-panel">
+    <h2>Battery</h2>
+    <div class="battery">
+      <div class="battery-level" id="batteryLevel"></div>
+    </div>
+    <p id="batteryStatus">0.0 / 15.0 kWh</p>
+
+    <div class="control-group">
+      <button onclick="resetBattery()">Reset Battery</button>
+    </div>
+
+    <div class="control-group">
+      <pre id="infoPanel">Waiting for data...</pre>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
