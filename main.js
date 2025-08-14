@@ -36,6 +36,8 @@ for (let i = 0; i < 3; i++) {
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       animation: false,
       scales: {
         x: { display: false },
