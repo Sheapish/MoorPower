@@ -6,16 +6,14 @@ body {
 }
 
 .left-panel {
-  flex: 1;
+  width: calc(100% - 350px); /* leave space for right-panel */
   padding: 20px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;           /* scroll if charts exceed viewport */
+  background-color: #f0f0f0;  /* optional for contrast */
 }
 
 .chart-box {
-  margin: 20px;
-  gap: 15px;
+  /* stack charts naturally, spacing handled by margin */
 }
 
 .single-chart {
@@ -23,12 +21,14 @@ body {
   border-radius: 12px;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin-bottom: 15px;
-  height: 200px;
+  margin-bottom: 20px;  /* spacing between charts */
+  height: 200px;        /* fixed height ensures Chart.js renders */
 }
+
 .single-chart canvas {
   width: 100%;
-  height: 100%;
+  height: 100%;          /* fill parent box */
+  display: block;        /* prevent inline-block spacing issues */
 }
 
 .right-panel {
