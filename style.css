@@ -8,13 +8,13 @@ body {
 .left-panel {
   width: calc(100% - 350px); /* full width minus right panel */
   padding: 20px;
-  height: 10vh;              /* full viewport height */
+  height: 100vh;              /* full viewport height */
   box-sizing: border-box;     /* include padding in height */
   overflow: hidden;           /* prevent chart-box from overflowing */
 }
 
 .chart-box {
-  flex: 1;                     /* fills full left-panel height */
+  flex: 2;                     /* fills full left-panel height */
   display: flex;
   flex-direction: column;
   gap: 15px;
