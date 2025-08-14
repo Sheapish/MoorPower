@@ -5,11 +5,9 @@ body {
   overflow: hidden;
 }
 
-.left-panel {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 100vh;
+.left-panel canvas {
+  max-height: 28vh; /* Each chart ~1/3 of the viewport height */
+  width: 100%;
 }
 
 .right-panel {
