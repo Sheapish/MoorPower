@@ -6,11 +6,11 @@ body {
 }
 
 .left-panel {
-  width: calc(100% - 350px); /* full width minus right panel */
+  width: calc(100% - 350px); 
   padding: 20px;
-  height: 100vh;              /* full viewport height */
-  box-sizing: border-box;     /* include padding in height */
-  overflow: hidden;           /* prevent chart-box from overflowing */
+  height: 100vh;             
+  box-sizing: border-box;    
+  overflow: hidden;
 }
 
 .chart-box {
