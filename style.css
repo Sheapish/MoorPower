@@ -9,7 +9,6 @@ body {
   flex: 1;
   padding: 20px;
   height: 100vh; 
-  display: flex;
   flex-direction: column;
 }
 
