@@ -6,12 +6,23 @@ body {
   overflow: hidden;
 }
 
-/* LEFT PANEL */
+body {
+  margin: 0;
+  display: flex;
+  font-family: Arial, sans-serif;
+  height: 100vh; /* full viewport height */
+  overflow: hidden;
+}
+
+/* Chart area fills all space to left of right-panel */
 .left-panel {
-  width: calc(100% - 350px);
+  flex: 1;              /* takes remaining width */
   padding: 20px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;          /* full height */
   background-color: #f0f0f0;
+  overflow-y: auto;
 }
 
 .chart-box {
@@ -21,13 +32,13 @@ body {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 15px;  /* spacing between charts */
+  gap: 15px;           /* spacing between charts */
+  flex: 1;             /* take full height of left-panel */
 }
 
-/* Each chart wrapper gets a fixed height */
 .chart-wrapper {
-  height: 180px;
-  min-height: 150px;
+  height: 180px;        /* preferred height */
+  min-height: 150px;    /* minimum height */
 }
 
 .chart-wrapper canvas {
@@ -36,17 +47,16 @@ body {
   display: block;
 }
 
-/* RIGHT PANEL */
 .right-panel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 350px;
+  width: 350px;          /* fixed panel */
   background: #f4f4f4;
-  padding: 20px;
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  overflow-y: auto; /* scroll if content taller than viewport */
+  height: 100vh;
+  padding: 20px;
+  overflow-y: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 /* BATTERY DISPLAY */
