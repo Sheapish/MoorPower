@@ -29,8 +29,9 @@ body {
 }
 
 .chart-wrapper {
-  flex: 1;                     /* scales with chart-box */
-  min-height: 150px;            /* prevents collapsing */
+  flex: 1;
+  min-height: 150px;
+  position: relative; /* for Chart.js canvas */
 }
 
 .chart-wrapper canvas {
