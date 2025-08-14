@@ -1,0 +1,144 @@
+#include <WiFi.h>
+#include <Wire.h>
+#include "ICM_20948.h"
+#include "MadgwickAHRS.h"
+
+// WiFi settings
+const char *ssid = "Carnegie_Guest";
+const char *password = "CleanInternet!";
+
+WiFiServer server(80);
+
+// IMU setup
+ICM_20948_I2C imu; // Using I2C interface
+Madgwick filter;   // AHRS filter
+
+unsigned long lastMicros = 0;
+
+// HTTP response helper
+void sendJSON(WiFiClient &client, String payload) {
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: application/json");
+  client.println("Access-Control-Allow-Origin: *");
+  client.println("Connection: close");
+  client.println();
+  client.print(payload);
+}
+
+void getQuaternion(float* q);
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+
+  // Connect to WiFi
+  Serial.printf("Connecting to %s...\n", ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWiFi connected");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+
+  // Start I2C
+  Wire.begin();
+  Wire.setClock(400000);
+
+  // Initialize IMU
+  if (imu.begin(Wire) != ICM_20948_Stat_Ok) {
+    Serial.println("IMU not detected. Check wiring.");
+    while (1);
+  }
+  Serial.println("IMU connected!");
+
+  ICM_20948_fss_t accFSS;
+  accFSS.a = gpm4; // For ±4g accelerometer
+  imu.setFullScale(ICM_20948_Internal_Acc, accFSS);
+
+  ICM_20948_fss_t gyrFSS;
+  gyrFSS.g = dps2000; // For ±2000 dps gyr
+  imu.setFullScale(ICM_20948_Internal_Gyr, gyrFSS);
+
+  // Filtering for Acc
+  ICM_20948_dlpcfg_t accDLP;
+  accDLP.a = acc_d5bw7_n8bw3; // Example: 5.7 Hz accel DLPF
+  imu.setDLPFcfg(ICM_20948_Internal_Acc, accDLP);
+
+  // Filtering for Gyr
+  ICM_20948_dlpcfg_t gyrDLP;
+  gyrDLP.g = gyr_d5bw7_n8bw9; // Example: 5.7 Hz gyr DLPF
+  imu.setDLPFcfg(ICM_20948_Internal_Gyr, gyrDLP);
+
+  // Madgwick filter setup
+  filter.begin(100); // Start with nominal 100 Hz
+  lastMicros = micros();
+}
+
+void loop() {
+  WiFiClient client = server.available();
+  if (client) {
+    String req = client.readStringUntil('\r');
+    client.flush();
+
+    if (req.indexOf("/data") != -1) {
+      imu.getAGMT(); // Acc, Gyr, Mag, Temp
+
+      // Calculate dt
+      unsigned long nowMicros = micros();
+      float dt = (nowMicros - lastMicros) / 1000000.0f;
+      lastMicros = nowMicros;
+
+      int16_t rawGyrX = imu.gyrX();
+      int16_t rawGyrY = imu.gyrY();
+      int16_t rawGyrZ = imu.gyrZ();
+
+      int16_t rawAccX = imu.accX();
+      int16_t rawAccY = imu.accY();
+      int16_t rawAccZ = imu.accZ();
+
+      int16_t rawMagX = imu.magX();
+      int16_t rawMagY = imu.magY();
+      int16_t rawMagZ = imu.magZ();
+
+      const float ACC_SENSITIVITY = 8192.0;  // LSB/g for ±4g
+      const float GYR_SENSITIVITY = 16.4;    // LSB/(°/s) for ±2000 dps
+      const float MAG_SENSITIVITY = 0.15;    // microTesla per LSB. CHECK DATASHEET AND ADJUST ACCORDINGLY
+
+      float ax = (float)rawAccX / ACC_SENSITIVITY;
+      float ay = (float)rawAccY / ACC_SENSITIVITY;
+      float az = (float)rawAccZ / ACC_SENSITIVITY;
+
+      float gx = ((float)rawGyrX / GYR_SENSITIVITY) * DEG_TO_RAD;
+      float gy = ((float)rawGyrY / GYR_SENSITIVITY) * DEG_TO_RAD;
+      float gz = ((float)rawGyrZ / GYR_SENSITIVITY) * DEG_TO_RAD;
+
+      float mx = (float)rawMagX * MAG_SENSITIVITY; 
+      float my = (float)rawMagY * MAG_SENSITIVITY;
+      float mz = (float)rawMagZ * MAG_SENSITIVITY;
+
+      // Filter with Madgwick
+      filter.update(gx, gy, gz, ax, ay, az, mx, my, mz);
+
+      // Now get quaternion from Madgwick filter
+      float qw = filter.q0;
+      float qx = filter.q1;
+      float qy = filter.q2;
+      float qz = filter.q3;
+
+      // Build JSON
+      String json = "{";
+      json += "\"q\":[" + String(qw, 6) + "," + String(qx, 6) + "," + String(qy, 6) + "," + String(qz, 6) + "],";
+      json += "\"acc\":[" + String(ax, 6) + "," + String(ay, 6) + "," + String(az, 6) + "],";
+      json += "\"gyr\":[" + String(gx, 6) + "," + String(gy, 6) + "," + String(gz, 6) + "],";
+      json += "\"dt\":" + String(dt, 6);
+      json += "}";
+
+      sendJSON(client, json);
+    }
+    client.stop();
+  }
+}
