@@ -28,7 +28,7 @@ body {
 
 .chart-wrapper {
   flex: 1;
-  max-height: 150px;
+  max-height: 250px;
   position: relative; /* for Chart.js canvas */
 }
 
