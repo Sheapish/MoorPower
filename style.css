@@ -8,7 +8,7 @@ body {
 .left-panel {
   flex: 1;
   padding: 20px;
-  height: 100vh; /* full viewport height */
+  height: 100vh; 
   display: flex;
   flex-direction: column;
 }
@@ -18,14 +18,14 @@ body {
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex: 1; /* fills remaining height of left panel */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .chart-box canvas {
-  flex: 1; /* each chart grows equally */
+  flex: 1; 
   margin-bottom: 10px;
   width: 100%;
 }
