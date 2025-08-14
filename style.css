@@ -18,16 +18,17 @@ body {
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex: 1; 
   display: flex;
   flex-direction: column;
   gap: 10px; /* space between canvases */
+  height: 100%; 
+  box-sizing: border-box;
 }
 
 .chart-box canvas {
-  flex: 1;           /* each canvas takes equal space */
+  flex: none;   
+  height: 30% /* each canvas takes equal space */
   width: 100%;
-  display: block;
 }
 
 .right-panel {
