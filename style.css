@@ -8,9 +8,26 @@ body {
 .left-panel {
   flex: 1;
   padding: 20px;
-  max-height: 100vh;
-  overflow-y: auto; /* optional, only if charts exceed viewport */
-  margin-right: 350px; /* make room for right panel */
+  height: 100vh; /* full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex: 1; /* fills remaining height of left panel */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chart-box canvas {
+  flex: 1; /* each chart grows equally */
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .left-panel canvas {
