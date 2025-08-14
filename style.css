@@ -23,12 +23,13 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   box-sizing: border-box;
-  overflow: hidden; /* ensures shadow shows and contents don’t overflow */
+  overflow: hidden;
 }
 
 .chart-wrapper {
   flex: 1;
   max-height: 250px;
+  max-width: calc(100% - 350px); 
   position: relative; /* for Chart.js canvas */
 }
 
