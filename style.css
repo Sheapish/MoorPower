@@ -25,10 +25,9 @@ body {
   box-sizing: border-box;
 }
 
-/* Each chart gets an exact pixel height */
 .chart-box canvas {
   width: 100% !important;
-  height: calc((100% - 30px)/3) !important; /* subtract total gap, divide by 3 */
+  flex: 1;             /* <- make each canvas grow equally */
 }
 
 .right-panel {
