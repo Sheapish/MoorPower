@@ -11,6 +11,9 @@ body {
 }
 
 .right-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
   width: 350px;
   background: #f4f4f4;
   padding: 20px;
