@@ -21,16 +21,15 @@ body {
 }
 
 .single-chart {
-  flex: 1;            /* each chart takes equal height */
+  flex: 1 1 200px;   /* grow, shrink, base 200px */
   background-color: white;
   border-radius: 12px;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
 }
-
 .single-chart canvas {
-  width: 100% !important;
-  height: 100% !important;  /* let Chart.js fill parent */
+  flex: 1;
 }
 
 .right-panel {
