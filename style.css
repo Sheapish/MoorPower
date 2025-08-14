@@ -5,19 +5,6 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/*
-.left-panel {
-  width: math(100vh - 350px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  background: #f4f4f4;
-  padding: 20px;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-  overflow-y: auto;
-}
-
 .chart-box {
   flex: 1;
   display: flex;
@@ -42,7 +29,6 @@ body {
   height: 100% !important;
   display: block;
 }
-*/
 
 .right-panel {
   width: 350px;
