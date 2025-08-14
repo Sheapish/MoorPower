@@ -27,6 +27,7 @@ body {
 /* Each chart wrapper gets a fixed height */
 .chart-wrapper {
   height: 180px;
+  min-height: 150px;
 }
 
 .chart-wrapper canvas {
