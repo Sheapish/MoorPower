@@ -14,20 +14,23 @@ body {
 }
 
 .chart-box {
-  background-color: white;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex: 1;            /* take full height of left-panel */
-  box-sizing: border-box;
+  height: 100%;
 }
 
-.chart-box canvas {
+.single-chart {
+  flex: 1;            /* each chart takes equal height */
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.single-chart canvas {
   width: 100% !important;
-  flex: 1;             /* <- make each canvas grow equally */
+  height: 100% !important;  /* let Chart.js fill parent */
 }
 
 .right-panel {
