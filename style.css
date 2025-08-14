@@ -5,18 +5,23 @@ body {
   font-family: Arial, sans-serif;
 }
 
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
 .left-panel {
-  width: calc(100% - 350px);
+  flex: 1;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: 6vh;
-  box-sizing: border-box;  
-  overflow: hidden;  
+  height: 100%;
 }
 
 .chart-box {
-  flex: 1;
+  flex: 1;                     /* fills full left-panel height */
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -24,14 +29,47 @@ body {
   padding: 15px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  box-sizing: border-box;
-  overflow: hidden; /* ensures shadow shows and contents don’t overflow */
 }
 
 .chart-wrapper {
   flex: 1;
   min-height: 150px;
   position: relative; /* for Chart.js canvas */
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.right-panel {
+  width: 350px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background: #f4f4f4;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  overflow-y: auto;
+}
+
+
+.chart-box {
+  flex: 1;                     /* fills full left-panel height */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.chart-wrapper {
+  flex: 1;                     /* scales with chart-box */
+  min-height: 150px;            /* prevents collapsing */
 }
 
 .chart-wrapper canvas {
