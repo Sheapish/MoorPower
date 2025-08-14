@@ -18,18 +18,18 @@ body {
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: 100%;  /* full left panel */
   display: flex;
   flex-direction: column;
   gap: 15px;
-  height: 100%;  /* take full left-panel height */
   box-sizing: border-box;
 }
 
+/* Each canvas fills space flexibly */
 .chart-box canvas {
-  /* FIX: give each canvas a relative height */
-  flex: none;        /* prevent collapsing */
-  height: 30%;       /* 3 charts at ~30% each, with gap fills the box */
-  width: 100%;
+  flex: 1 1 0;   /* grow and shrink equally */
+  width: 100% !important;  /* Chart.js respects inline width, so force 100% */
+  height: auto !important;  /* Chart.js handles height automatically */
 }
 
 .right-panel {
