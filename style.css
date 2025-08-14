@@ -8,7 +8,8 @@ body {
 .left-panel {
   flex: 1;
   padding: 20px;
-  height: 100vh; 
+  height: 100vh;
+  display: flex;
   flex-direction: column;
 }
 
@@ -19,15 +20,15 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;           /* spacing between charts */
-  height: 100%;        /* full left-panel height */
+  gap: 15px;
+  flex: 1;            /* take full height of left-panel */
   box-sizing: border-box;
 }
 
+/* Each chart gets an exact pixel height */
 .chart-box canvas {
-  flex: 1 1 0;         /* each canvas grows equally */
-  width: 100%;
-  max-height: none;    /* remove previous limits */
+  width: 100% !important;
+  height: calc((100% - 30px)/3) !important; /* subtract total gap, divide by 3 */
 }
 
 .right-panel {
