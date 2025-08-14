@@ -20,15 +20,15 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  height: 100%;       /* take full left-panel height */
+  gap: 15px;           /* spacing between charts */
+  height: 100%;        /* full left-panel height */
   box-sizing: border-box;
 }
 
 .chart-box canvas {
-  flex: none;         /* prevent collapsing */
-  height: 30%;        /* 3 charts ~30% each + gap fills the box */
+  flex: 1 1 0;         /* each canvas grows equally */
   width: 100%;
+  max-height: none;    /* remove previous limits */
 }
 
 .right-panel {
