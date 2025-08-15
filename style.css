@@ -22,7 +22,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Distribute content vertically */
-  gap: 20px;
+  gap: 5px;
 
   overflow: hidden; /* No scroll unless needed */
   box-sizing: border-box;
