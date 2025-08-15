@@ -57,19 +57,23 @@ html, body {
 
 /* Individual chart container */
 .chart-wrapper {
-  width: calc(100% - 40px); /* Stretch almost to the right panel, leaving 20px padding each side */
-  max-width: 100%;           /* Ensure it doesn't overflow */
+  width: calc(100% - 40px); /* Stretch almost to right panel */
+  max-width: 100%;
   background: white;
   padding: 12px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px; /* Set a fixed height for each chart */
 }
 
 /* Make canvas fill its wrapper */
 .chart-wrapper canvas {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important; /* Fill the wrapper vertically */
 }
 
 .battery {
