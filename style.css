@@ -55,10 +55,10 @@ html, body {
   justify-content: flex-start; /* Start from top */
 }
 
-/* Individual chart container */
 .chart-wrapper {
-  width: calc(100% - 40px); /* Stretch almost to right panel */
+  width: calc(100% - 40px); /* Almost full width */
   max-width: 100%;
+  min-width: 400px; /* Prevent horizontal collapse below this width */
   background: white;
   padding: 12px;
   border-radius: 12px;
@@ -67,13 +67,12 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px; /* Set a fixed height for each chart */
+  height: 250px; /* Fixed height for chart */
 }
 
-/* Make canvas fill its wrapper */
 .chart-wrapper canvas {
   width: 100% !important;
-  height: 100% !important; /* Fill the wrapper vertically */
+  height: 100% !important;
 }
 
 .battery {
