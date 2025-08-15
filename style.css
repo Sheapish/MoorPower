@@ -40,7 +40,7 @@ html, body {
   margin-right: 350px; /* Leave room for right-panel */
   padding: 20px;
   display: flex;
-  justify-content: flex-start; /* Align charts to top */
+  flex-direction: column; /* Stack charts container vertically */
   box-sizing: border-box;
 }
 
@@ -48,17 +48,14 @@ html, body {
 .chart-box {
   display: flex;
   flex-direction: column; /* Stack charts vertically */
-  gap: 20px; /* Space between charts */
-  width: 100%;
-  height: 100%;       /* Fill the full height of the left-panel */
-  align-items: center; /* Center charts horizontally */
-  justify-content: flex-start; /* Start from top */
+  gap: 20px;              /* Space between charts */
+  flex: 1;                /* Fill remaining height of left panel */
 }
 
+/* Individual chart wrapper */
 .chart-wrapper {
-  width: calc(100% - 40px); /* Almost full width */
-  max-width: 100%;
-  min-width: 1000px; /* Prevent horizontal collapse below this width */
+  flex: 1;                /* Each chart takes equal vertical space */
+  width: 100%;            /* Stretch horizontally to fill container */
   background: white;
   padding: 12px;
   border-radius: 12px;
@@ -67,9 +64,9 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px; /* Fixed height for chart */
 }
 
+/* Make canvas fill its wrapper */
 .chart-wrapper canvas {
   width: 100% !important;
   height: 100% !important;
