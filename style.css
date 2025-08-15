@@ -48,11 +48,14 @@ html, body {
 /* Container for all charts */
 .chart-box {
   display: flex;
-  flex-direction: column; /* Stack charts vertically */
-  gap: 20px; /* Space between charts */
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-  align-items: center; /* Center each chart horizontally */
+  height: 100%;       /* Make it fill the full height of the left-panel */
+  align-items: center;
+  justify-content: space-evenly; /* Space charts evenly top-to-bottom */
 }
+
 
 /* Individual chart container */
 .chart-wrapper {
