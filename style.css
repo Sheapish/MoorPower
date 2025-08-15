@@ -40,24 +40,24 @@ html, body {
   margin-right: 350px; /* Leave room for right-panel */
   padding: 20px;
   display: flex;
-  justify-content: center; /* Center the chart-box */
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: centre;
   box-sizing: border-box;
 }
 
 /* Container for all charts */
 .chart-box {
   display: flex;
-  flex-wrap: wrap; /* Allow charts to wrap if screen is smaller */
-  gap: 20px; /* Even space between charts */
-  justify-content: space-evenly; /* Equal spacing across rows */
+  flex-direction: column; /* Stack charts vertically */
+  gap: 20px; /* Space between charts */
   width: 100%;
+  align-items: center; /* Center each chart horizontally */
 }
 
 /* Individual chart container */
 .chart-wrapper {
-  flex: 1 1 calc(33% - 40px); /* 3 per row with gaps */
-  min-width: 300px; /* Prevent charts from being too small */
+  width: 100%; /* Full width of container */
+  max-width: 600px; /* Optional: limit chart width */
   background: white;
   padding: 12px;
   border-radius: 12px;
