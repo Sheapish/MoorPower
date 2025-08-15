@@ -40,8 +40,9 @@ html, body {
   margin-right: 350px; /* Leave room for right-panel */
   padding: 20px;
   display: flex;
-  flex-direction: column; /* Stack charts container vertically */
+  flex-direction: column; /* Stack chart container vertically */
   box-sizing: border-box;
+  height: 100vh; /* Full viewport height */
 }
 
 /* Container for all charts */
@@ -49,13 +50,13 @@ html, body {
   display: flex;
   flex-direction: column; /* Stack charts vertically */
   gap: 20px;              /* Space between charts */
-  flex: 1;                /* Fill remaining height of left panel */
+  flex: 1;                /* Fill all available height */
 }
 
 /* Individual chart wrapper */
 .chart-wrapper {
-  flex: 1;                /* Each chart takes equal vertical space */
-  width: 100%;            /* Stretch horizontally to fill container */
+  flex: 1 1 0;            /* Grow/shrink equally, start from 0 */
+  width: 100%;            /* Stretch almost to the right panel */
   background: white;
   padding: 12px;
   border-radius: 12px;
