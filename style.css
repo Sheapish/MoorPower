@@ -16,7 +16,7 @@ html, body {
   right: 0;
   height: 100vh; /* Full viewport height */
   background: #ffffff;
-  padding: 24px;
+  padding: 12px;
   box-shadow: -3px 0 8px rgba(0, 0, 0, 0.08);
 
   display: flex;
