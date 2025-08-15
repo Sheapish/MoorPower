@@ -18,17 +18,14 @@ html, body {
   background: #ffffff;
   padding: 12px;
   box-shadow: -3px 0 8px rgba(0, 0, 0, 0.08);
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Stack naturally from top */
   gap: 12px; /* Small gap between all elements */
-
   overflow: hidden; /* No scroll unless needed */
   box-sizing: border-box;
 }
 
-/* Top photo (adds small gap below it) */
 .right-panel img.top-photo {
   display: block;
   width: 100%;
@@ -37,7 +34,43 @@ html, body {
   margin-bottom: 8px; /* Small gap below top photo */
 }
 
-/* Battery container */
+/* Left panel - main content area */
+.left-panel {
+  flex: 1;
+  margin-right: 350px; /* Leave room for right-panel */
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Center the chart-box */
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* Container for all charts */
+.chart-box {
+  display: flex;
+  flex-wrap: wrap; /* Allow charts to wrap if screen is smaller */
+  gap: 20px; /* Even space between charts */
+  justify-content: space-evenly; /* Equal spacing across rows */
+  width: 100%;
+}
+
+/* Individual chart container */
+.chart-wrapper {
+  flex: 1 1 calc(33% - 40px); /* 3 per row with gaps */
+  min-width: 300px; /* Prevent charts from being too small */
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* Make canvas fill its wrapper */
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
 .battery {
   display: block; /* Prevent inline collapse */
   height: 50px;
@@ -51,7 +84,6 @@ html, body {
   margin: 0;
 }
 
-/* Battery level fill */
 .battery-level {
   height: 100%;
   width: 0%;
@@ -59,12 +91,10 @@ html, body {
   transition: width 0.4s ease, background-color 0.3s ease;
 }
 
-/* Control groups */
 .control-group {
   margin: 0;
 }
 
-/* Info boxes */
 .info-box {
   background: #ffffff;
   border-radius: 14px;
@@ -81,7 +111,6 @@ html, body {
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Labels */
 label {
   display: block;
   margin-bottom: 0;
@@ -89,7 +118,6 @@ label {
   color: #555;
 }
 
-/* Carnegie logo */
 .carnegie-logo {
   margin-top: auto; /* Push logo to bottom only if extra space exists */
   display: block;
