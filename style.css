@@ -40,27 +40,25 @@ html, body {
   margin-right: 350px; /* Leave room for right-panel */
   padding: 20px;
   display: flex;
-  justify-content: flex-start;
-  align-items: centre;
+  justify-content: flex-start; /* Align charts to top */
   box-sizing: border-box;
 }
 
 /* Container for all charts */
 .chart-box {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: column; /* Stack charts vertically */
+  gap: 20px; /* Space between charts */
   width: 100%;
-  height: 100%;       /* Make it fill the full height of the left-panel */
-  align-items: center;
-  justify-content: space-evenly; /* Space charts evenly top-to-bottom */
+  height: 100%;       /* Fill the full height of the left-panel */
+  align-items: center; /* Center charts horizontally */
+  justify-content: flex-start; /* Start from top */
 }
-
 
 /* Individual chart container */
 .chart-wrapper {
-  width: 100%; /* Full width of container */
-  max-width: 600px; /* Optional: limit chart width */
+  width: calc(100% - 40px); /* Stretch almost to the right panel, leaving 20px padding each side */
+  max-width: 100%;           /* Ensure it doesn't overflow */
   background: white;
   padding: 12px;
   border-radius: 12px;
