@@ -21,7 +21,7 @@ html, body {
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute content vertically */
+  justify-content: flex-start;
   gap: 0px;
 
   overflow: hidden; /* No scroll unless needed */
