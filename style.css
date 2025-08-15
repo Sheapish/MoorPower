@@ -8,20 +8,24 @@ html, body {
   color: #333;
 }
 
-/* Right panel */
+/* Right panel - fits exactly within viewport */
 .right-panel {
   width: 350px;
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 100vh; /* Full viewport height */
   background: #ffffff;
   padding: 24px;
   box-shadow: -3px 0 8px rgba(0, 0, 0, 0.08);
-  overflow-y: auto;
+
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Distribute content vertically */
   gap: 20px;
+
+  overflow: hidden; /* No scroll unless needed */
+  box-sizing: border-box;
 }
 
 /* Battery container */
