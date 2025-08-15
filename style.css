@@ -58,7 +58,7 @@ html, body {
 .chart-wrapper {
   width: calc(100% - 40px); /* Almost full width */
   max-width: 100%;
-  min-width: 400px; /* Prevent horizontal collapse below this width */
+  min-width: 1000px; /* Prevent horizontal collapse below this width */
   background: white;
   padding: 12px;
   border-radius: 12px;
