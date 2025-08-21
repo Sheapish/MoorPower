@@ -8,11 +8,4 @@ A web frontend fetches the data via HTTP (`https://sheapish.github.io/MoorPower/
 ## Features
 - ESP32 acts as a WiFi server
 - ICM-20948 DMP (Digital Motion Processor) provides **fused quaternion** orientation
-- Sensor data served as JSON:
-  ```json
-  {
-    "q": [w, x, y, z],   // quaternion
-    "acc": [ax, ay, az], // acceleration (m/s²)
-    "gyr": [gx, gy, gz], // angular velocity (rad/s)
-    "dt": 0.05           // timestep (s)
-  }
+- Sensor data served as JSON
