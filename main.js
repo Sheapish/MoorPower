@@ -98,34 +98,34 @@ function unit(v) {
 // Live data fetcher
 async function fetchData() {
   try {
-    const res = await fetch('http://172.16.94.130/data');
+    const res = await fetch('http://localhost:3000/data'); // proxy to ESP32
     if (!res.ok) throw new Error('Network response was not ok');
     const data = await res.json();
 
-    const q = data.q;            // quaternion [w,x,y,z]
+    const q = data.q;      // quaternion [w,x,y,z]
     const acc_body = data.acc;
-    const gyr_body = data.gyr;
+    const gyr_body = data.gyr; // rad/s
     const dt = data.dt || 0.05;
 
     const beltRates = [];
 
     for (let i = 0; i < PTOs.length; i++) {
-      const p_pto = PTOs[i].r_body;
-      const dir = unit(PTOs[i].anchor.map((a, idx) => a - p_pto[idx]));
+        const p_pto = PTOs[i].r_body;
+        const dir = unit(PTOs[i].anchor.map((a, idx) => a - p_pto[idx]));
 
-      // Quick magnitude estimation from simulated angular + linear velocity
-      let rate = Math.random() * 1.2; // replace this with real calc from your IMU rotation
-      if (rate < 0) rate = 0;
-      beltRates.push(rate);
+        const vel = cross(gyr_body, p_pto);
+        let rate = vel[0]*dir[0] + vel[1]*dir[1] + vel[2]*dir[2];
+        if (rate < 0) rate = 0;
+        beltRates.push(rate);
 
-      const chart = charts[i];
-      chart.data.datasets[0].data.push(rate);
-      chart.data.labels.push('');
-      if (chart.data.datasets[0].data.length > maxPoints) {
-        chart.data.datasets[0].data.shift();
-        chart.data.labels.shift();
-      }
-      chart.update();
+        const chart = charts[i];
+        chart.data.datasets[0].data.push(rate);
+        chart.data.labels.push('');
+        if (chart.data.datasets[0].data.length > maxPoints) {
+            chart.data.datasets[0].data.shift();
+            chart.data.labels.shift();
+        }
+        chart.update();
     }
 
     const totalBeltRate = beltRates.reduce((sum, rate) => sum + rate, 0);
