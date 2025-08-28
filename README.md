@@ -1,11 +1,17 @@
-## ESP32 + ICM-20948 IMU Webserver
-
-This project simulates the power produced by carnegie's moor power device utilising an **ESP32 (Freenove)** and **ICM-20948 9-DOF IMU**, streaming sensor data (quaternion, accelerometer, gyroscope) over WiFi.  
-A web frontend fetches the data via HTTP (https://sheapish.github.io/MoorPower/) and visualizes PTO belt power and battery charge in real time.
-
----
-
-## Features
-- ESP32 acts as a WiFi server
-- ICM-20948 DMP (Digital Motion Processor) provides **fused quaternion** orientation
-- Sensor data served as JSON
+## Setup Prior to Exhibition
+1. Extensions to install in VSC: PlatformIO, ESP-IDF: Explorer
+## Setup at the Exhibition
+1. Connect display computer to the exhibition centre wifi, or if that does not exist, a hotspot
+2. Plug-in the esp32 to the computer, using a data transfer micro USB
+3. Open IMU_method2 in VSC (File -> Open Folder -> IMU_method2)
+4. Navigate in the VSC left panel: src -> main.cpp. Make sure to connect the ESP32 to the same wifi
+network as the display. Edit wifi details accordingly in lines 10-11 of main.cpp
+5. Upload main.cpp to the ESP32 (CTRL+ALT+U)
+6. Once uploaded, open the VSC serial monitor (CTRL+ALT+S), and it should display something similar
+to the following; IMU connected. Connecting to WiFi... ... WiFi connected. IP: 172.16.94.130
+This IP address is where the website is displayed, so to view the page enter http://<IP address>/
+7. F11 for fullscreen, F5 to refresh
+## Editing the webpage
+Make your edits to files, then save
+Click PlatformIO icon (Alien head on the left sidebar) -> esp32dev -> Platform -> Upload Filestystem Image
+Wait whilst the code uploads to the ESP32
