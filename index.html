@@ -2,47 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>3-PTO Belt Rate Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title class="desktop-title">Wave Energy Simulation</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  
-  <div class="left-panel">
-    <div class="chart-box">
+  <header>
+    <img src="images/carnegie_logo_long.png" alt="Dashboard Logo" class="logo">
+    <h1 class="desktop-title">MoorPower Wave Energy Simulation</h1>
+  </header>
+
+  <div class="dashboard">
+    <div class="charts">
+      <div class="chart-wrapper"><canvas id="chart0"></canvas></div>
       <div class="chart-wrapper"><canvas id="chart1"></canvas></div>
       <div class="chart-wrapper"><canvas id="chart2"></canvas></div>
-      <div class="chart-wrapper"><canvas id="chart3"></canvas></div>
+    </div>
+
+    <div class="battery-section">
+      <h2>Battery</h2>
+      <div class="battery">
+        <div class="battery-level" id="batteryLevel"></div>
+      </div>
+      <p id="batteryStatus">0%</p>
+      <button onclick="resetBattery()">Feed the Fish!</button>
     </div>
   </div>
 
-  <div class="right-panel">
-    <h2>Battery</h2>
-    <div class="battery">
-      <div class="battery-level" id="batteryLevel"></div>
-    </div>
-    <p id="batteryStatus">0.0 / 15.0 kWh</p>
-
-    <div class="control-group">
-      <button onclick="resetBattery()">Reset Battery</button>
-    </div>
-
-    <div class="control-group">
-      <pre id="infoPanel">Waiting for data...</pre>
-    </div>
-
-    <img src="MoorPower.png" alt="MoorPower Image" style="max-width:100%; margin-top:10px; border-radius:8px;">
-
-    <div class="info-box">
-      MoorPower strategically generates onboard electricity, 
-      offering a sustainable alternative to diesel generators for 
-      offshore operations, ultimately mitigating carbon 
-      emissions, reducing risk, and optimising energy costs.
-    </div>
-
-    <img src="carnegie_logo.png" alt="Carnegie Clean Energy Logo" style="max-width:100%; margin-top:10px; border-radius:8px;">
-  </div>
-
-  <script src="main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
