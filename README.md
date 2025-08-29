@@ -2,6 +2,7 @@
 1. Extensions to install in VSC: PlatformIO, ESP-IDF: Explorer
 2. Download the lastest version of the SparkFun ICM-20948 Arduino Library from github
 3. File Structure:
+
 IMU_method2 -- lib -- SparkFun ICM-20948 Arduino Library
 
             -- data -- images -- "up to date MoorPower logo" save it as "carnegie_logo_long.png
