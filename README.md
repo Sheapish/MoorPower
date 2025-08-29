@@ -5,7 +5,7 @@
 
             -- lib -- SparkFun ICM-20948 Arduino Library
 
-            -- data -- images -- "up to date MoorPower logo" save it as "carnegie_logo_long.png
+            -- data -- images -- "up to date MoorPower logo" save it as "carnegie_logo_long.png"
    
                     -- index.html
    
