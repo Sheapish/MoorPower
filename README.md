@@ -3,12 +3,19 @@
 2. Download the lastest version of the SparkFun ICM-20948 Arduino Library from github
 3. File Structure:
 IMU_method2 -- lib -- SparkFun ICM-20948 Arduino Library
+
             -- data -- images -- "up to date MoorPower logo" save it as "carnegie_logo_long.png
+   
                     -- index.html
+   
                     -- script.js
+   
                     -- style.css
+   
             -- src -- main.cpp
+   
             -- platformio.ini
+   
 ## Setup at the Exhibition
 1. Connect display computer to the exhibition centre wifi, or if that does not exist, a hotspot
 2. Plug-in the esp32 to the computer, using a data transfer micro USB
